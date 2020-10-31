@@ -9,10 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public interface IListener {
-        void onClicked(int position);
-    }
-
     protected final TextView mName;
     protected final IListener mListener;
 
@@ -23,7 +19,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         mListener = listener;
         mName = itemView.findViewById(R.id.name);
 
-        final View.OnClickListener clickListener = v -> mListener.onClicked(getAdapterPosition());
+        final View.OnClickListener clickListener = v -> mListener.onClicked(ItemRep.getInstance().item(getAdapterPosition()));
 
         itemView.setOnClickListener(clickListener);
     }

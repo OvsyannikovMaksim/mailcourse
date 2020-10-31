@@ -11,11 +11,11 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<ViewHolder> {
     protected final List<Item> mData;
-    protected final ViewHolder.IListener mListener;
+    protected final IListener mListener;
 
 
-    public Adapter(List<Item> data, ViewHolder.IListener listener) {
-        
+    public Adapter(List<Item> data, IListener listener) {
+
         mListener = listener;
         mData = data;
     }

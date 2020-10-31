@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentList.IListener{
+public class MainActivity extends AppCompatActivity implements IListener{
 
 
     protected static final String TAG_DETAILS= "DETAILS";
