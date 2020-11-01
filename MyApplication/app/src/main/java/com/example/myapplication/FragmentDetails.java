@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import java.io.Serializable;
 public class FragmentDetails extends Fragment {
 
     protected static final String KEY = "KEY";
-    protected static final String FL_TAG = "FL_TAG";
 
     public static FragmentDetails newInstance(Item item) {
 
@@ -67,9 +67,4 @@ public class FragmentDetails extends Fragment {
         return (Item) droid;
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(FL_TAG, ItemRep.getInstance().size());
-    }
 }

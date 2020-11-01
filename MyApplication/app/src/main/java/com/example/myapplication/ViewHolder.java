@@ -12,6 +12,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     protected final TextView mName;
     protected final IListener mListener;
 
+    Item mItem;
+
 
     public ViewHolder(@NonNull View itemView, IListener listener) {
         super(itemView);
@@ -19,16 +21,17 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         mListener = listener;
         mName = itemView.findViewById(R.id.name);
 
-        final View.OnClickListener clickListener = v -> mListener.onClicked(ItemRep.getInstance().item(getAdapterPosition()));
+        final View.OnClickListener clickListener = v -> mListener.onClicked(mItem);
 
         itemView.setOnClickListener(clickListener);
     }
 
     void bind(Item item) {
 
-        mName.setText(item.name);
+        mItem=item;
+        mName.setText(mItem.name);
 
-        switch (item.colour) {
+        switch (mItem.colour) {
             case 1:
                 mName.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.blue));
                 break;

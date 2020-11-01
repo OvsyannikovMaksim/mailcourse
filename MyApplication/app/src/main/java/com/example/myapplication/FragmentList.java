@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class FragmentList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        int position = ItemRep.add();
+        int position = rep.add();
         mAdapter.notifyItemInserted(position);
     }
 
@@ -30,7 +31,7 @@ public class FragmentList extends Fragment implements View.OnClickListener{
     private Adapter mAdapter;
     protected IListener mListener;
     protected Button button;
-
+    protected ItemRep rep = new ItemRep();;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -57,12 +58,13 @@ public class FragmentList extends Fragment implements View.OnClickListener{
 
         final RecyclerView recycler = view.findViewById(R.id.recycler);
 
-        GridLayoutManager mLayout = new GridLayoutManager(getActivity(), getResources().getInteger(R.integer.cols), LinearLayoutManager.VERTICAL, false);
-        if (savedInstanceState!=null){
+        GridLayoutManager mLayout = new GridLayoutManager(getActivity(),
+                getResources().getInteger(R.integer.cols), LinearLayoutManager.VERTICAL, false);
+        if (savedInstanceState != null) {
             int amount = savedInstanceState.getInt(FL_TAG);
-            ItemRep.setInstance(amount);
+            rep = new ItemRep(amount);
         }
-        mAdapter=new Adapter(ItemRep.getInstance().list(), new ClickChecker());
+        mAdapter = new Adapter(rep.list(), new ClickChecker());
         recycler.setAdapter(mAdapter);
         recycler.setLayoutManager(mLayout);
     }
@@ -78,7 +80,8 @@ public class FragmentList extends Fragment implements View.OnClickListener{
     @Override
     public void onSaveInstanceState(@NonNull Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(FL_TAG, ItemRep.getInstance().size());
+        savedInstanceState.putInt(FL_TAG, rep.size());
+        Log.d("HERE", "СОХРАНИЛ СОСТОЯНИЕ ЛИСТА В КЛАССЕ ЛИСТА");
     }
 
     class ClickChecker implements IListener{
